@@ -10,7 +10,15 @@ from typing import Dict, List, Literal
 from .runtime_bridge import BaseAgent, Logger, registry
 
 StateLabel = Literal["REFLECTION", "INTENSITY", "CRISIS"]
-ModeLabel = Literal["companion", "presence", "insight", "journal"]
+ModeLabel = Literal[
+    "companion",
+    "presence",
+    "insight",
+    "journal",
+    "memory",
+    "voice",
+    "gemini_live",
+]
 
 _STOP_WORDS = {
     "a",
@@ -207,6 +215,21 @@ class SolCompanionAgent(BaseAgent):
         return markers[:3]
 
     def _mode_hint(self, mode: ModeLabel) -> str:
+        if mode == "memory":
+            return (
+                "Memory mode: prioritize continuity, mirror recurring themes, and offer one concise recap "
+                "of what has repeated across recent sessions."
+            )
+        if mode == "voice":
+            return (
+                "Voice mode: use short, breathable lines with gentle pacing that read clearly aloud. "
+                "Keep response chunks brief and warm."
+            )
+        if mode == "gemini_live":
+            return (
+                "Gemini Live mode: maintain low-latency phrasing and short turns. "
+                "If live transport is unavailable, gracefully continue in text mode without interruption."
+            )
         if mode == "presence":
             return (
                 "Presence mode: slow the rhythm, use spacious language, and favor silence-aware reflection. "

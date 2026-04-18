@@ -21,7 +21,7 @@ Sol Companion is a separate local application that uses the AI Studio multi-agen
 
 - Deeper reflection with mode-aware prompts.
 - Better grounding with optional breath-based grounding cues.
-- New modes: `companion`, `presence`, `insight`, `journal`.
+- New modes: `companion`, `presence`, `insight`, `journal`, `memory`, `voice`, `gemini_live`.
 - Journaling features with local journal entry persistence.
 - Presence mode (metaphorical, slow, deep pacing).
 - Insight mode (pattern reflection).
@@ -71,6 +71,9 @@ No routing, no planner, no branching.
 - `POST /sol/reset` clears memory and session thread.
 - `POST /sol/summary` generates and stores a session summary.
 - `GET /sol/modes` returns available UI/backend interaction modes.
+- `GET /sol/evolution/status` returns v3.2 Phase 1 track states.
+- `POST /sol/evolution/start` updates a specific track state.
+- `GET /sol/dependency-graph` returns Mermaid graph for Space dashboards.
 
 ## Run Locally
 

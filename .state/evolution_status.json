@@ -1,0 +1,31 @@
+{
+  "phase": "v3.2-phase1-spaces-first",
+  "updated_at": "2026-04-18T00:00:00Z",
+  "tracks": {
+    "memory_mode": {
+      "state": "active",
+      "next_action": "Implement memory schema versioning and journal retrieval endpoints",
+      "plan": "plans/FULL_MEMORY_MODE_PLAN.md",
+      "started_at": "2026-04-18T00:00:00Z"
+    },
+    "voice_mode": {
+      "state": "active",
+      "next_action": "Harden voice UX start/stop with explicit fallback states",
+      "plan": "plans/FULL_VOICE_MODE_PLAN.md",
+      "started_at": "2026-04-18T00:00:00Z"
+    },
+    "presence_mode": {
+      "state": "active",
+      "next_action": "Refine presence pacing templates and response cadence controls",
+      "plan": "plans/FULL_PRESENCE_MODE_PLAN.md",
+      "started_at": "2026-04-18T00:00:00Z"
+    },
+    "gemini_live_integration": {
+      "state": "active_blocked",
+      "next_action": "Wire feature-flagged live adapter and wait for Gemini API key",
+      "plan": "plans/FULL_GEMINI_LIVE_INTEGRATION_PLAN.md",
+      "blocker": "Missing Gemini Live credentials",
+      "started_at": "2026-04-18T00:00:00Z"
+    }
+  }
+}
