@@ -1,0 +1,35 @@
+{
+  "name": "Sol Companion — Sol OS",
+  "image": "mcr.microsoft.com/devcontainers/python:3.11-bullseye",
+
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": { "version": "20" },
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+
+  "postCreateCommand": "bash .devcontainer/setup.sh",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+        "GitHub.vscode-pull-request-github",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "charliermarsh.ruff"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "github.copilot.chat.agentDefinitionPaths": [".vscode/copilot-agents"],
+        "github.copilot.chat.promptFilesLocations": { ".vscode/prompts": true }
+      }
+    }
+  },
+
+  "forwardPorts": [5000],
+
+  "remoteEnv": {
+    "SOL_OS_PATH": "../aistudio/sol-os-cloud"
+  }
+}

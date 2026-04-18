@@ -1,0 +1,1 @@
+"""Sol Companion application package."""
