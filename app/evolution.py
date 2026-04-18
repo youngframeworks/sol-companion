@@ -8,6 +8,13 @@ from pathlib import Path
 from typing import Dict
 
 _TRACKS = ("memory_mode", "voice_mode", "presence_mode", "gemini_live_integration")
+_TRACK_ORDER = ["memory_mode", "voice_mode", "presence_mode", "gemini_live_integration"]
+_DISPLAY = {
+    "memory_mode": "Memory mode",
+    "voice_mode": "Voice mode",
+    "presence_mode": "Presence mode",
+    "gemini_live_integration": "Gemini Live integration",
+}
 
 
 def _utc_now() -> str:
@@ -95,3 +102,44 @@ def set_track_state(track: str, state: str, next_action: str | None = None) -> D
 
     _status_file().write_text(json.dumps(payload, indent=2), encoding="utf-8")
     return payload
+
+
+def next_task_payload() -> Dict[str, str]:
+    payload = load_or_init_status()
+    tracks = payload.get("tracks", {})
+
+    for key in _TRACK_ORDER:
+        track = tracks.get(key, {})
+        state = str(track.get("state", "planned"))
+        action = str(track.get("next_action", "Continue implementation"))
+        blocker = str(track.get("blocker", "")).strip()
+
+        if state in {"active", "planned"}:
+            return {
+                "track": key,
+                "title": _DISPLAY.get(key, key),
+                "state": state,
+                "next_action": action,
+                "blocked": "false",
+                "plan": str(track.get("plan", "")),
+            }
+
+        if state == "active_blocked":
+            return {
+                "track": key,
+                "title": _DISPLAY.get(key, key),
+                "state": state,
+                "next_action": action,
+                "blocked": "true",
+                "blocker": blocker or "Blocked",
+                "plan": str(track.get("plan", "")),
+            }
+
+    return {
+        "track": "none",
+        "title": "No active tracks",
+        "state": "done",
+        "next_action": "All configured tracks complete",
+        "blocked": "false",
+        "plan": "",
+    }

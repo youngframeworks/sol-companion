@@ -72,6 +72,7 @@ No routing, no planner, no branching.
 - `POST /sol/summary` generates and stores a session summary.
 - `GET /sol/modes` returns available UI/backend interaction modes.
 - `GET /sol/evolution/status` returns v3.2 Phase 1 track states.
+- `GET /sol/next-task` returns current top-priority evolution task.
 - `POST /sol/evolution/start` updates a specific track state.
 - `GET /sol/dependency-graph` returns Mermaid graph for Space dashboards.
 

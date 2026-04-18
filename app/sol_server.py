@@ -8,7 +8,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
 
-from .evolution import load_or_init_status, set_track_state
+from .evolution import load_or_init_status, next_task_payload, set_track_state
 from .runtime_bridge import Logger, os_root_summary
 from .sol_workflow import SolCompanionWorkflow
 
@@ -113,6 +113,11 @@ async def list_modes() -> dict:
 @app.get("/sol/evolution/status")
 async def evolution_status() -> dict:
     return load_or_init_status()
+
+
+@app.get("/sol/next-task")
+async def next_task() -> dict:
+    return next_task_payload()
 
 
 @app.post("/sol/evolution/start")
